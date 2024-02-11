@@ -1,13 +1,14 @@
-vim.wo.scrolloff = 15
+vim.wo.scrolloff = 0
 vim.wo.number = true
 vim.wo.relativenumber = true
-vim.g.tabstop = 4
 vim.g.softtabstop = 4
-vim.g.shiftwidth = 4
 vim.g.expandtab = true
 vim.g.smartindent = true
 vim.g.updatetime=50
 vim.g.termguicolors = true
+vim.opt.tabstop = 4
+vim.opt.shiftwidth = 4
+vim.opt.expandtab = true
 
 vim.g.mapleader = ' '
 
@@ -30,36 +31,25 @@ vim.api.nvim_set_keymap('i', '[', '[]<Left>', { noremap = true })
 vim.api.nvim_set_keymap('i', '"', '""<Left>', { noremap = true })
 vim.api.nvim_set_keymap('n', '<C-d>', '<C-d>zz', { noremap = true })
 vim.api.nvim_set_keymap('n', '<C-u>', '<C-u>zz', { noremap = true })
-vim.api.nvim_set_keymap('x', '<Leader>c', [[:s/^/#/<CR>]], { noremap = true })
+vim.api.nvim_set_keymap('n', '<C-u>', '<C-u>zz', { noremap = true })
 
-vim.api.nvim_set_keymap('x', '<Leader>u', [[:s/^#//<CR>]], { noremap = true })
+vim.api.nvim_set_keymap('x', '<Leader>c', [[:s/^/\/\//<CR>]], { noremap = true })
+vim.api.nvim_set_keymap('x', '<Leader>u', [[:s/^\/\///<CR>]], { noremap = true })
 
 vim.cmd('call plug#begin(\'C:/Users/Hp Laptop/AppData/Local/nvim-data/plugged\')')
 
-vim.cmd('Plug \'neoclide/coc.nvim\', {\'branch\': \'release\'}')
-vim.cmd('Plug \'rose-pine/neovim\', {\'as\': \'plugin-name\'}')
 vim.cmd('Plug \'nvim-treesitter/nvim-treesitter\'')
 vim.cmd('Plug \'nvim-lua/plenary.nvim\'')
 vim.cmd('Plug \'nvim-telescope/telescope.nvim\', { \'tag\': \'0.1.3\' }')
+vim.cmd('Plug \'catppuccin/nvim\', {\'as\':\'catppuccin\'}')
 vim.cmd('Plug \'ThePrimeagen/harpoon\'')
-
+vim.cmd('Plug \'tpope/vim-fugitive\'')
+vim.cmd('Plug \'mbbill/undotree\'')
+vim.cmd('Plug \'numToStr/Comment.nvim\'')
 
 vim.cmd('call plug#end()')
 
-vim.cmd('colorscheme rose-pine')
-
-local keyset = vim.keymap.set
-
-function _G.check_back_space()
-    local col = vim.fn.col('.') - 1
-    return col == 0 or vim.fn.getline('.'):sub(col, col):match('%s') ~= nil
-end
-
-local opts = {silent = true, noremap = true, expr = true, replace_keycodes = false}
-keyset("i", "<TAB>", 'coc#pum#visible() ? coc#pum#next(1) : v:lua.check_back_space() ? "<TAB>" : coc#refresh()', opts)
-keyset("i", "<S-TAB>", [[coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"]], opts)
-keyset("i", "<cr>", [[coc#pum#visible() ? coc#pum#confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"]], opts)
-vim.api.nvim_create_user_command("Format", "call CocAction('format')", {})
+vim.cmd.colorscheme "catppuccin"
 
 vim.api.nvim_set_hl(0,"Normal",{
     bg = "none"
@@ -152,10 +142,18 @@ local ui = require("harpoon.ui")
 vim.keymap.set("n", "<leader>a", mark.add_file)
 vim.keymap.set("n", "<leader>s", ui.toggle_quick_menu)
 
-vim.keymap.set("n", "<C-q>", function() ui.nav_file(1) end)
-vim.keymap.set("n", "<C-d>", function() ui.nav_file(2) end)
-vim.keymap.set("n", "<C-e>", function() ui.nav_file(3) end)
-vim.keymap.set("n", "<C-r>", function() ui.nav_file(4) end)
+vim.keymap.set("n", "<C-h>", function() ui.nav_file(1) end)
+vim.keymap.set("n", "<C-j>", function() ui.nav_file(2) end)
+vim.keymap.set("n", "<C-k>", function() ui.nav_file(3) end)
+vim.keymap.set("n", "<C-l>", function() ui.nav_file(4) end)
 
 
+-- vim-fugitive configs
+-- Gsplit   HEAD~1:%
+--
+vim.keymap.set("n","gs",vim.cmd.Git)
 
+-- undotree
+vim.keymap.set("n","<leader>u",vim.cmd.UndotreeToggle)
+
+require('Comment').setup()
