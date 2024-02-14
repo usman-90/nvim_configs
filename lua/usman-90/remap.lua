@@ -23,3 +23,25 @@ vim.api.nvim_set_keymap('n', '<C-u>', '<C-u>zz', { noremap = true })
 
 vim.api.nvim_set_keymap('x', '<Leader>c', [[:s/^/\/\//<CR>]], { noremap = true })
 vim.api.nvim_set_keymap('x', '<Leader>u', [[:s/^\/\///<CR>]], { noremap = true })
+
+vim.wo.scrolloff = 15
+vim.wo.number = true
+vim.wo.relativenumber = true
+vim.g.softtabstop = 4
+vim.g.expandtab = true
+vim.g.smartindent = true
+vim.g.updatetime=50
+vim.g.termguicolors = true
+vim.opt.tabstop = 4
+vim.opt.shiftwidth = 4
+vim.opt.expandtab = true
+vim.opt.swapfile = false
+vim.opt.backup = false
+vim.opt.undodir = 'C:/Users/Hp Laptop/AppData/Local/nvim/undodir'
+vim.opt.undofile = true
+vim.opt.hlsearch = false
+vim.opt.incsearch = true
+
+
+
+
