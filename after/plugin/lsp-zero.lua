@@ -14,6 +14,33 @@ local cmp = require('cmp')
 local cmp_action = require('lsp-zero').cmp_action()
 
 
+vim.diagnostic.config({
+  virtual_text = {
+    prefix = '■', -- Could be '●', '▎', 'x'
+    spacing = 2,
+  },
+  float = {
+    source = "always",
+    border = "rounded",
+  },
+  signs = true,
+  underline = true,
+  update_in_insert = false,
+  severity_sort = true,
+})
+
+vim.api.nvim_create_autocmd("CursorHold", {
+  callback = function()
+    vim.diagnostic.open_float(nil, {
+      focusable = false,
+      close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
+      border = "rounded",
+      source = "always",
+      prefix = "",
+      scope = "cursor",
+    })
+  end,
+})
 
 
 

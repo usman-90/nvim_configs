@@ -1,7 +1,8 @@
 vim.g.mapleader = ' '
 
+vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float, { desc = "Show diagnostic" })
 vim.api.nvim_set_keymap('n', '<leader>pv', ':Vex<CR>', { noremap = true })
-vim.api.nvim_set_keymap('n', '<leader><CR>', ':so C:/Users/siddi/AppData/Local/nvim/init.lua<CR>', { noremap = true })
+vim.api.nvim_set_keymap('n', '<leader><CR>', ':so C:/Users/Usman Siddiqui/AppData/Local/nvim/init.lua<CR>', { noremap = true })
 vim.api.nvim_set_keymap('n', '<leader>k', '<C-^>', { noremap = true })
 vim.api.nvim_set_keymap('i', 'jj', '<C-c>', { noremap = true })
 vim.api.nvim_set_keymap('n', '<leader>f', ':Ex<CR>', { noremap = true })
@@ -37,10 +38,11 @@ vim.opt.shiftwidth = 4
 vim.opt.expandtab = true
 vim.opt.swapfile = false
 vim.opt.backup = false
-vim.opt.undodir = 'C:/Users/siddi/AppData/Local/nvim/undodir'
+vim.opt.undodir = 'C:/Users/Usman Siddiqui/AppData/Local/nvim/undodir'
 vim.opt.undofile = true
 vim.opt.hlsearch = false
 vim.opt.incsearch = true
+vim.o.updatetime = 300  -- 300ms delay instead of 1000ms
 
 
 return {}
